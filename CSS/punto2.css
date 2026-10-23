@@ -1,0 +1,225 @@
+/* Importación de fuentes coquette y redondeadas */
+@import url('https://googleapis.com');
+
+:root {
+    --bg-main: #f2f7fc;           /* Fondo general crema-azul muy suave */
+    --blue-dark: #657b8b;         /* Azul pizarra oscuro para textos y bordes duros */
+    --blue-light: #a4b2bc;        /* Azul grisáceo para subheaders */
+    --blue-vintage: #ccdbee;      /* Azul cielo viejo empolvado */
+    --blue-soft: #e5eefc;         /* Azul pastel translúcido */
+    --cream: #f9fdfb;             /* Blanco roto crema */
+    --blue-button: #4a5d6d;       /* Azul profundo para el botón inflado 3D */
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-main);
+    
+    background-image: url('../resources/paisaje.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top center;
+    background-size: auto 150vh;
+    
+    margin: 0;
+    padding: 40px 15px;
+    color: var(--blue-dark);
+}
+
+/* Contenedor principal con OREJITAS */
+.container-app {
+    max-width: 440px;
+    margin: 0 auto;
+    background: var(--cream);
+    padding: 35px 25px 25px 25px;
+    border-radius: 40px;
+    border: 4px solid var(--blue-dark);
+    box-shadow: 0 12px 0px rgba(101, 123, 139, 0.15);
+    position: relative;
+}
+
+.container-app::before,
+.container-app::after {
+    content: "";
+    position: absolute;
+    top: -42px;
+    width: 38px;
+    height: 55px;
+    background: var(--cream);
+    border: 4px solid var(--blue-dark);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0;
+    z-index: -1;
+}
+
+.container-app::before { left: 40px; transform: rotate(-5deg); }
+.container-app::after { right: 40px; transform: rotate(5deg); }
+
+.welcome-header {
+    background-color: var(--blue-soft);
+    color: var(--blue-dark);
+    text-align: center;
+    padding: 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 3px dashed var(--blue-vintage);
+}
+
+.welcome-header h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.welcome-header span {
+    font-size: 0.85em;
+    display: block;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+.gif-container {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.welcome-gif {
+    width: 140px;        /* Reducimos el ancho a un tamaño prudente y estético */
+    height: 140px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0px 4px 0px var(--blue-vintage));
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin: 15px 0 6px 0;
+    font-size: 0.9em;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    border: 3px solid var(--blue-light);
+    border-radius: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1em;
+    color: var(--blue-dark);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: var(--blue-dark);
+    background-color: var(--blue-soft);
+}
+
+button[type="submit"] {
+    width: 100%;
+    background: var(--blue-button);
+    color: var(--cream);
+    padding: 14px;
+    border: none;
+    border-radius: 24px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 0 6px 0px #2a3844, 0 10px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button[type="submit"]:hover {
+    background: #3d4f5d;
+}
+
+button[type="submit"]:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px #2a3844, 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Cuadro de Resultados */
+.alert {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--blue-soft);
+    border: 3px dashed var(--blue-vintage);
+    border-radius: 24px;
+}
+
+.alert strong {
+    font-size: 0.85em;
+    color: var(--blue-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.result-output {
+    font-size: 1em;
+    line-height: 1.5;
+    color: var(--blue-button);
+    word-wrap: break-word;
+    font-weight: 700;
+}
+
+/* Stickers Flotantes Animados Laterales */
+.sticker-decor {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 130px;
+    height: 130px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+    animation: balanceoCutecore 2.5s infinite ease-in-out alternate;
+}
+
+.sticker-left {
+    left: -300px;
+    background-image: url('../resources/flor-boton.png');
+}
+
+.sticker-right {
+    right: -300px;
+    background-image: url('../resources/galleta.png');
+    animation-delay: 0.5s;
+}
+
+@keyframes balanceoCutecore {
+    0% { transform: translateY(-50%) rotate(-12deg); }
+    100% { transform: translateY(-50%) rotate(12deg); }
+}
+
+/* Enlace inferior de regreso */
+.back-menu-box {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 3px dotted var(--blue-light);
+    padding-top: 15px;
+}
+
+.back-menu-link {
+    color: var(--blue-light);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.back-menu-link:hover {
+    color: var(--blue-dark);
+}
+
+@media (max-width: 680px) {
+    .sticker-decor { display: none; }
+}

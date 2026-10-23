@@ -1,0 +1,242 @@
+/* Importación de fuentes coquette y redondeadas */
+@import url('https://googleapis.com');
+
+:root {
+    --bg-main: #f2fcf6;           /* Fondo general crema-verde muy suave */
+    --green-dark: #557b65;        /* Verde oliva oscuro para textos y bordes duros */
+    --green-light: #a4bcaf;       /* Verde grisáceo para subheaders y guías */
+    --green-vintage: #cceedb;     /* Verde menta viejo empolvado para contrastes */
+    --green-soft: #e5fceb;        /* Verde pastel translúcido para fondo de cajas */
+    --cream: #f9fdfb;             /* Blanco roto crema */
+    --green-button: #3d5d4a;      /* Verde profundo para el botón inflado 3D */
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--bg-main);
+    background-image: url('../resources/fondo-taller.png');
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-position: top center;
+    background-size: auto 100vh;
+    margin: 0;
+    padding: 60px 15px;
+    color: var(--green-dark);
+}
+
+/* Ficha contenedora principal */
+.container-app {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--cream);
+    padding: 30px 20px 20px 20px;
+    border-radius: 40px;
+    border: 4px solid var(--green-dark);
+    box-shadow: 0 12px 0px rgba(85, 123, 101, 0.15);
+    position: relative;
+}
+
+/* Cabecera estilo sello mint */
+.welcome-header {
+    background-color: var(--green-soft);
+    color: var(--green-dark);
+    text-align: center;
+    padding: 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 3px dashed var(--green-dark);
+}
+
+.welcome-header h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.6em;
+}
+
+.welcome-header span {
+    font-size: 0.85em;
+    display: block;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+.gif-container {
+    text-align: center;
+    margin: 20px -20px; 
+    width: calc(100% + 40px); 
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.welcome-gif {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 380px;
+    display: block;
+}
+
+/* Listado de entradas alineadas */
+.profile-fields-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.profile-field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.field-tag {
+    font-weight: 700;
+    font-size: 0.95em;
+    color: var(--green-dark);
+    width: 110px;
+    text-align: left;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 18px;
+    border: 2.5px solid var(--green-dark);
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 0.95em;
+    color: var(--green-dark);
+    outline: none;
+    box-sizing: border-box;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus {
+    background: var(--green-soft);
+    border-color: var(--green-button);
+}
+
+.helper-text {
+    font-size: 0.75em;
+    font-weight: 700;
+    color: var(--green-light);
+    margin: 5px 0 20px 5px;
+    text-align: left;
+}
+
+/* Botón inflado 3D arcilla */
+.btn-primary {
+    width: 100%;
+    background: var(--green-button);
+    color: var(--cream);
+    padding: 15px;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.15em;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 5px 0px #2a3f32;
+    transition: transform 0.1s;
+}
+
+.btn-primary:active {
+    transform: translateY(3px);
+    box-shadow: none;
+}
+
+/* --- RECUADRO DE RESULTADOS CREATIVO: EFECTO PAPEL CUADRICULADO MATEMÁTICO --- */
+.alert {
+    background: #ffffff;
+    /* Simula las rejillas de un cuaderno de matemáticas con líneas verde claro */
+    background-image: linear-gradient(rgba(164, 188, 175, 0.2) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(164, 188, 175, 0.2) 1px, transparent 1px);
+    background-size: 15px 15px;
+    border: 3px solid var(--green-dark);
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 25px;
+    text-align: left;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+}
+
+.result-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2em;
+    color: var(--green-button);
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2.5px dashed var(--green-dark);
+    padding-bottom: 5px;
+    background: #ffffff; /* Tapa la cuadrícula de fondo solo en el título */
+}
+
+/* Filas de fórmulas destacadas matemáticamente */
+.result-field {
+    font-size: 0.95em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+    background: #ffffff; /* Hace que el texto se lea limpio sobre los cuadros */
+    padding: 4px 8px;
+    border-radius: 8px;
+    border-left: 3px solid var(--green-light);
+}
+
+.result-label {
+    color: var(--green-dark);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+/* --- STICKERS DECORATIVOS DESFASADOS EN ALTURA --- */
+.sticker-decor {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+    animation: flotacionVertical 3s infinite ease-in-out alternate;
+}
+
+/* STICKER IZQUIERDO: Más arriba en la pantalla (top 30%) */
+.sticker-left { 
+    left: -150px; 
+    top: 30%;
+    background-image: url('../resources/conejo.png'); 
+}
+
+/* STICKER DERECHO: Más abajo en la pantalla (top 60%) y con retraso rítmico */
+.sticker-right { 
+    right: -150px; 
+    top: 60%;
+    background-image: url('../resources/conejo.png'); 
+    animation-delay: 0.6s; 
+}
+
+@keyframes flotacionVertical {
+    0% { transform: translateY(-15px); }
+    100% { transform: translateY(15px); }
+}
+
+.back-menu-box {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 2px dashed var(--green-dark);
+    padding-top: 15px;
+}
+
+.back-menu-link {
+    color: var(--green-dark);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+@media (max-width: 780px) {
+    .sticker-decor { display: none; }
+}

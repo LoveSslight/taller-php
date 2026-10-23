@@ -1,0 +1,221 @@
+@import url('https://googleapis.com');
+
+:root {
+    --bg-main: #fcf6f2;         
+    --cafe-dark: #8b7365;    
+    --cafe-light: #bcaaa4;    
+    --pink-vintage: #ffccd5;   
+    --pink-soft: #ffe5ec; 
+    --cream: #fffdf9;        
+    --chocolate-button: #6d4c41; 
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-image: url(../resources/botones.jpg);
+    background-repeat:repeat-x;
+    background-attachment: fixed;
+    background-size: auto 100vh;
+    background-position: center;
+    margin: 0;
+    padding: 60px 15px;
+    color: var(--cafe-dark);
+}
+
+.container-app {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--cream);
+    padding: 35px 25px 25px 25px;
+    border-radius: 40px;
+    border: 4px solid var(--cafe-dark);
+    box-shadow: 0 12px 0px rgba(139, 115, 101, 0.2);
+    position: relative;
+}
+
+/* orejitas del contenedor */
+.container-app::before,
+.container-app::after {
+    content: "";
+    position: absolute;
+    top: -24px;
+    width: 60px;
+    height: 35px;
+    background: var(--cream);
+    border: 4px solid var(--cafe-dark);
+    border-bottom: none;
+    border-radius: 40px 40px 0 0;
+    z-index: -1;
+}
+
+.container-app::before { left: 40px; transform: rotate(-5deg); }
+.container-app::after { right: 40px; transform: rotate(5deg); }
+
+.welcome-header {
+    background-color: var(--pink-soft);
+    color: var(--cafe-dark);
+    text-align: center;
+    padding: 12px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    border: 3px dashed var(--pink-vintage);
+    box-shadow: inset 0 0 8px #ffffff;
+}
+
+.welcome-header h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.8em;
+    letter-spacing: -0.5px;
+}
+
+.welcome-header span {
+    font-size: 0.85em;
+    display: block;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 25px;
+    border: 3px solid var(--cafe-light);
+    border-radius: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1em;
+    color: var(--cafe-dark);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: inset 0 4px 6px rgba(139, 115, 101, 0.05);
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: var(--cafe-dark);
+    background-color: var(--pink-soft);
+}
+
+button[type="submit"] {
+    width: 100%;
+    background: var(--chocolate-button);
+    color: var(--cream);
+    padding: 16px;
+    border: none;
+    border-radius: 24px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 6px 0px #40241a, 
+                0 10px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button[type="submit"]:hover {
+    background: #5d4037;
+}
+
+button[type="submit"]:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px #40241a, 
+                0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--pink-soft);
+    border: 3px solid var(--pink-vintage);
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 4px 0px rgba(255, 204, 213, 0.4);
+}
+
+.alert strong {
+    font-size: 0.85em;
+    color: var(--cafe-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.result-acronym {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 2.2em;
+    color: var(--chocolate-button);
+    display: block;
+    margin-top: 5px;
+}
+
+
+
+.sticker-decor {
+    position: absolute;
+    top: 50%;       
+    transform: translateY(-50%);
+    width: 130px;   
+    height: 130px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10; 
+
+    animation: balanceoCutecore 2.5s infinite ease-in-out alternate;
+}
+
+.sticker-left {
+    left: -300PX;
+    background-image: url('../resources/estrella-boton.png'); 
+}
+
+.sticker-right {
+    right: -300px;
+    background-image: url('../resources/naruto.png');
+    animation-delay: 0.5s;    
+}
+
+@keyframes balanceoCutecore {
+    0% {
+        transform: translateY(-50%) rotate(-12deg); 
+    }
+    100% {
+        transform: translateY(-50%) rotate(12deg);
+    }
+}
+
+@media (max-width: 680px) {
+    .sticker-decor {
+        display: none;
+    }
+}
+
+.back-menu-box {
+    margin-top: 30px;
+    text-align: center;
+    border-top: 3px dotted var(--cafe-light);
+    padding-top: 20px;
+}
+
+.back-menu-link {
+    color: var(--cafe-light);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
+
+.back-menu-link:hover {
+    color: var(--cafe-dark);
+}
