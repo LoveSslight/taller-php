@@ -1,0 +1,330 @@
+@import url('https://googleapis.com');
+
+:root {
+    /* Paleta cromática pastel basada fielmente en la imagen adjunta */
+    --bg-main: #fceef2;          /* Fondo rosa pastel ultra suave */
+    --pink-border: #f7cbd5;     /* Bordes y cuadrícula rosa */
+    --blue-dark: #8ccae7;       /* Texto principal y líneas conectoras */
+    --blue-light: #b5deee;      /* Bordes celestes secundarios */
+    --blue-vintage: #dcf2f9;    /* Encabezados y cápsulas celestes */
+    --yellow-pastel: #fbf9cf;   /* Detalles amarillos para destacar textos */
+    --cream: #ffffff;            /* Paneles limpios de fondo blanco */
+    --blue-button: #61bece;     /* Botón estético azul apagado */
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-image: url(../resources/pup.jpg);
+    background-repeat: nepeat y;
+    background-attachment: fixed;
+    background-size: auto 100vh;
+    margin: 0;
+    padding: 40px 15px;
+    color: var(--blue-dark);
+}
+
+.container-app {
+    max-width: 900px;
+    background-image: url(../resources/bunbun.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: auto 100vh;
+    padding: 30px 25px;
+    margin: 0 auto;
+    border-radius: 30px;
+    border: 3.5px solid var(--blue-dark);
+    box-shadow: 0 10px 0px rgba(99, 143, 164, 0.15);
+    position: relative;
+}
+
+.welcome-header {
+    background-color: var(--blue-vintage);
+    color: var(--blue-dark);
+    text-align: center;
+    padding: 14px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    border: 3px solid var(--blue-dark);
+}
+
+.welcome-header h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.5em;
+    text-transform: lowercase;
+}
+
+.welcome-header span {
+    font-size: 0.85em;
+    display: block;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+/* Caja de introducción con fondo amarillo pastel para romper la monotonía */
+.intro-box {
+    background: var(--yellow-pastel);
+    border: 3px dashed var(--blue-dark);
+    border-radius: 20px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.intro-box p {
+    margin: 0 0 8px 0;
+}
+.intro-box p:last-child {
+    margin: 0;
+}
+
+.gif-container {
+    text-align: center;
+    margin: 20px -25px; 
+    width: calc(100% + 50px); 
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.welcome-gif {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 180px;
+    object-fit: contain;
+    display: block;
+}
+
+.profile-fields-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.profile-field-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.field-tag {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--blue-dark);
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    border: 3px solid var(--blue-dark);
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 0.95em;
+    color: var(--blue-dark);
+    outline: none;
+    box-sizing: border-box;
+    background: #fffbfd; /* Tono blanco-rosa muy ligero para el campo */
+}
+
+input[type="text"]:focus {
+    background: var(--blue-soft);
+    border-color: var(--blue-button);
+}
+
+.helper-text {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--blue-dark);
+    opacity: 0.8;
+    margin: 8px 0 20px 5px;
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--blue-button);
+    color: var(--cream);
+    padding: 14px;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: 3px solid var(--blue-dark);
+    box-shadow: 0 5px 0px #315157;
+    text-transform: lowercase;
+    transition: all 0.1s ease;
+}
+
+.btn-primary:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0px #315157;
+}
+
+/* Contenedor Flex para las columnas del resultado */
+.flex-resultados {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+/* Columna Izquierda: Mapa del Árbol (Fondo blanco limpio con bordes celestes) */
+.col-grafico {
+    flex: 1.2;
+    background: #ffffff;
+    border: 3px solid var(--blue-dark);
+    border-radius: 24px;
+    padding: 20px;
+}
+
+/* Columna Derecha: Explicación Escrita (Inspirada en el bloc de notas rosa de la imagen) */
+.col-texto {
+    flex: 0.8;
+    background: #fff5f7; /* Fondo rosa claro para simular la hoja del bloc */
+    background-image: linear-gradient(var(--pink-border) 1px, transparent 1px);
+    background-size: 100% 28px;
+    line-height: 28px;
+    border: 3px solid var(--blue-dark);
+    border-radius: 24px;
+    padding: 20px;
+}
+
+.result-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1em;
+    color: var(--blue-button);
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 3px solid var(--blue-dark);
+    padding-bottom: 5px;
+    background: #ffffff;
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
+.result-structure {
+    font-family: 'Fredoka', monospace;
+    font-size: 0.95em;
+    font-weight: 700;
+    white-space: pre-wrap;
+}
+
+/* Estilos de Graficado del Árbol Binario */
+.arbol-grafico {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    overflow-x: auto;
+}
+
+.arbol-grafico ul {
+    padding-top: 20px; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.arbol-grafico li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px 0 0 0;
+}
+
+.arbol-grafico li::before, .arbol-grafico li::after {
+    content: '';
+    position: absolute; 
+    top: 0; 
+    right: 50%;
+    border-top: 2.5px solid var(--blue-dark);
+    width: 50%; 
+    height: 20px;
+}
+
+.arbol-grafico li::after {
+    right: auto; 
+    left: 50%;
+    border-left: 2.5px solid var(--blue-dark);
+}
+
+.arbol-grafico li:only-child::after, .arbol-grafico li:only-child::before { display: none; }
+.arbol-grafico li:only-child { padding-top: 0; }
+.arbol-grafico li:first-child::before, .arbol-grafico li:last-child::after { border: 0 none; }
+.arbol-grafico li:last-child::before { border-right: 2.5px solid var(--blue-dark); border-radius: 0 5px 0 0; }
+.arbol-grafico li:first-child::after { border-radius: 5px 0 0 0; }
+.arbol-grafico ul ul::before { content: ''; position: absolute; top: 0; left: 50%; border-left: 2.5px solid var(--blue-dark); height: 20px; }
+
+/* Burbujas del árbol decoradas con un sutil fondo lila/rosa blanquecino */
+.arbol-nodo {
+    border: 2.5px solid var(--blue-dark);
+    padding: 8px 14px;
+    color: var(--blue-dark);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 50%;
+    background: #fffafc;
+    display: inline-block;
+    box-shadow: 0 4px 0px rgba(99, 143, 164, 0.2);
+    z-index: 2;
+    min-width: 20px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.sticker-decor {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+    animation: flotacionVertical 4s infinite ease-in-out alternate;
+}
+
+.sticker-up { 
+    left: -200px; 
+    top: 15%;
+    background-image: url('../resources/melody.gif'); 
+}
+
+.sticker-down { 
+    right: -200px; 
+    top: 65%;
+    background-image: url('../resources/cinamon.jpg'); 
+    animation-delay: 0.8s; 
+}
+
+@keyframes flotacionVertical {
+    0% { transform: translateY(-15px); }
+    100% { transform: translateY(15px); }
+}
+
+.back-menu-box {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 3px solid var(--blue-light);
+    padding-top: 15px;
+}
+
+.back-menu-link {
+    color: var(--blue-dark);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+    .flex-resultados { flex-direction: column; }
+}

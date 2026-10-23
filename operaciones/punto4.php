@@ -1,8 +1,4 @@
 <?php
-// 1. INICIALIZAR SESIÓN PARA EVITAR REENVÍOS AL RECARGAR CON F5
-session_start();
-
-// CLASE POO: OPERACIONES DE CONJUNTOS MATEMÁTICOS
 class OperacionesConjuntos {
     private array $conjuntoA;
     private array $conjuntoB;
@@ -37,30 +33,80 @@ class OperacionesConjuntos {
     }
 }
 
-// 2. CONTROLADOR DE FORMULARIO CON PATRÓN PRG
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['conjuntoA'], $_POST['conjuntoB'])) {
-    $conjuntos = new OperacionesConjuntos($_POST['conjuntoA'], $_POST['conjuntoB']);
-    
-    $_SESSION['res_p4'] = array(
-        'union'        => $conjuntos->obtenerUnion(),
-        'interseccion' => $conjuntos->obtenerInterseccion(),
-        'diffAB'       => $conjuntos->obtenerDiferenciaAB(),
-        'diffBA'       => $conjuntos->obtenerDiferenciaBA()
-    );
-    
-    $_SESSION['strA_p4'] = $_POST['conjuntoA'];
-    $_SESSION['strB_p4'] = $_POST['conjuntoB'];
+//Abstracción de la sesión global de PHP
+class GestorSesion {
+    public function __construct() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
 
-    header("Location: punto4.php");
-    exit();
+    public function guardar(string $clave, mixed $valor): void {
+        $_SESSION[$clave] = $valor;
+    }
+
+    public function obtener(string $clave, mixed $defecto = null): mixed {
+        return $_SESSION[$clave] ?? $defecto;
+    }
+
+    public function eliminar(string $clave): void {
+        unset($_SESSION[$clave]);
+    }
 }
 
-// 3. CAPTURA Y LIMPIEZA DE MEMORIA TEMPORAL
-$resultados = isset($_SESSION['res_p4']) ? $_SESSION['res_p4'] : null;
-$strAAnterior = isset($_SESSION['strA_p4']) ? $_SESSION['strA_p4'] : "";
-$strBAnterior = isset($_SESSION['strB_p4']) ? $_SESSION['strB_p4'] : "";
+/**
+ * Clase Controlador: Maneja el flujo de la petición web.
+ */
+class ConjuntosController {
+    private GestorSesion $sesion;
 
-unset($_SESSION['res_p4'], $_SESSION['strA_p4'], $_SESSION['strB_p4']);
+    public function __construct() {
+        $this->sesion = new GestorSesion();
+    }
+
+    public function procesarPeticion(): void {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['conjuntoA'], $_POST['conjuntoB'])) {
+            $conjuntos = new OperacionesConjuntos($_POST['conjuntoA'], $_POST['conjuntoB']);
+            
+            $resultados = [
+                'union'        => $conjuntos->obtenerUnion(),
+                'interseccion' => $conjuntos->obtenerInterseccion(),
+                'diffAB'       => $conjuntos->obtenerDiferenciaAB(),
+                'diffBA'       => $conjuntos->obtenerDiferenciaBA()
+            ];
+            
+            $this->sesion->guardar('res_p4', $resultados);
+            $this->sesion->guardar('strA_p4', $_POST['conjuntoA']);
+            $this->sesion->guardar('strB_p4', $_POST['conjuntoB']);
+
+            header("Location: punto4.php");
+            exit();
+        }
+    }
+
+    public function obtenerDatosVista(): array {
+        $datos = [
+            'resultados'   => $this->sesion->obtener('res_p4'),
+            'strAAnterior' => $this->sesion->obtener('strA_p4', ''),
+            'strBAnterior' => $this->sesion->obtener('strB_p4', '')
+        ];
+
+        $this->sesion->eliminar('res_p4');
+        $this->sesion->eliminar('strA_p4');
+        $this->sesion->eliminar('strB_p4');
+
+        return $datos;
+    }
+}
+
+// Ejecución del controlador POO y mapeo seguro de variables para la vista
+$controlador = new ConjuntosController();
+$controlador->procesarPeticion();
+
+$datosVista = $controlador->obtenerDatosVista();
+$resultados   = $datosVista['resultados'];
+$strAAnterior = $datosVista['strAAnterior'];
+$strBAnterior = $datosVista['strBAnterior'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -68,7 +114,6 @@ unset($_SESSION['res_p4'], $_SESSION['strA_p4'], $_SESSION['strB_p4']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Punto 4 - Operaciones de Conjuntos</title>
-    <!-- Enlazado directo a tu nuevo archivo verde pastel -->
     <link rel="stylesheet" href="../css/punto4.css">
 </head>
 <body>
@@ -76,16 +121,14 @@ unset($_SESSION['res_p4'], $_SESSION['strA_p4'], $_SESSION['strB_p4']);
 <div class="container-app">
     
     <div class="welcome-header">
-        <h2>🌸 operaciones algebraicas 🌸</h2>
+        <h2>🌸 Operaciones algebraicas 🌸</h2>
         <span>unión, intersección y diferencias</span>
     </div>
 
-    <!-- Ilustración expansiva central -->
     <div class="gif-container">
-        <img src="../resources/conejo.png" alt="Decoración Álgebra" class="welcome-gif">
+        <img src="../resources/baldi.gif" alt="Decoración Álgebra" class="welcome-gif">
     </div>
 
-    <!-- Formulario estructurado -->
     <form method="POST" action="punto4.php">
         
         <div class="profile-fields-list">
@@ -100,15 +143,14 @@ unset($_SESSION['res_p4'], $_SESSION['strA_p4'], $_SESSION['strB_p4']);
             </div>
         </div>
 
-        <p class="helper-text">* escribe los números enteros separados únicamente por comas.</p>
+        <p class="helper-text">--Escribe los números enteros separados únicamente por comas.</p>
 
-        <button type="submit" class="btn-primary">procesar conjuntos 🔮</button>
+        <button type="submit" class="btn-primary">procesar conjuntos</button>
     </form>
 
-    <!-- Ficha con Rejilla de Cuadernos de Matemáticas para el reporte -->
     <?php if ($resultados !== null): ?>
         <div class="alert">
-            <div class="result-title">📋 conjuntos calculados</div>
+            <div class="result-title">Conjuntos calculados</div>
             <div class="result-field"><span class="result-label">Unión (A ∪ B) =</span> { <?php echo implode(', ', $resultados['union']); ?> }</div>
             <div class="result-field"><span class="result-label">Intersección (A ∩ B) =</span> { <?php echo implode(', ', $resultados['interseccion']); ?> }</div>
             <div class="result-field"><span class="result-label">Diferencia (A - B) =</span> { <?php echo implode(', ', $resultados['diffAB']); ?> }</div>
@@ -116,15 +158,17 @@ unset($_SESSION['res_p4'], $_SESSION['strA_p4'], $_SESSION['strB_p4']);
         </div>
     <?php endif; ?>
 
-    <!-- Pegatinas desofasadas asimétricamente flotando en vertical -->
     <div class="sticker-decor sticker-left"></div>
     <div class="sticker-decor sticker-right"></div>
 
     <div class="back-menu-box">
-        <a href="../index.php" class="back-menu-link">← volver al panel principal</a>
+        <a href="../index.php" class="back-menu-link">
+            ← volver al menú
+        </a>
     </div>
 
 </div>
 
 </body>
 </html>
+

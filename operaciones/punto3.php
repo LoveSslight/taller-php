@@ -1,10 +1,11 @@
 <?php
-session_start();
+/**
+ * Clase Modelo: Lógica pura de cálculos estadísticos (Media, Mediana, Moda).
+ */
 class Estadistica {
     private array $numeros;
 
     public function __construct(array $numeros) {
-        //un array ya guardado en objeto
         $valoresLimpios = array_map('floatval', $numeros);
         sort($valoresLimpios); 
         $this->numeros = $valoresLimpios; 
@@ -21,7 +22,6 @@ class Estadistica {
 
         $mitad = (int)floor($total / 2);
         
-        // Si la cantidad de elementos es impar
         if ($total % 2 !== 0) {
             return $this->numeros[$mitad];
         }
@@ -43,43 +43,108 @@ class Estadistica {
     }
 }
 
-$cantidad = isset($_SESSION['cant_p3']) ? (int)$_SESSION['cant_p3'] : 0;
-$valores = isset($_SESSION['valores_p3']) ? $_SESSION['valores_p3'] : array();
-$resultados = isset($_SESSION['res_p3']) ? $_SESSION['res_p3'] : null;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    if (isset($_POST['establecer_cantidad'])) {
-        $cant = (int)$_POST['cantidad'];
-        if ($cant > 0 && $cant <= 12) {
-            $_SESSION['cant_p3'] = $cant;
-            $_SESSION['valores_p3'] = array_fill(0, $cant, "");
+/**
+ * Clase de Servicio: Abstracción orientada a objetos de $_SESSION.
+ */
+class GestorSesion {
+    public function __construct() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
-        $_SESSION['res_p3'] = null;
-        header("Location: punto3.php");
-        exit();
     }
-    
-    if (isset($_POST['calcular_estadisticas'])) {
-        $valoresIngresados = $_POST['valores'] ?? array();
-        $_SESSION['valores_p3'] = $valoresIngresados;
-        
-        $analizador = new Estadistica($valoresIngresados);
-        $_SESSION['res_p3'] = array(
-            'promedio' => round($analizador->calcularPromedio(), 4),
-            'mediana'  => $analizador->calcularMediana(),
-            'moda'     => $analizador->calcularModa()
-        );
-        header("Location: punto3.php");
-        exit();
+
+    public function guardar(string $clave, mixed $valor): void {
+        $_SESSION[$clave] = $valor;
     }
-    
-    if (isset($_POST['reiniciar'])) {
-        unset($_SESSION['cant_p3'], $_SESSION['valores_p3'], $_SESSION['res_p3']);
-        header("Location: punto3.php");
-        exit();
+
+    public function obtener(string $clave, mixed $defecto = null): mixed {
+        return $_SESSION[$clave] ?? $defecto;
+    }
+
+    public function eliminar(string $clave): void {
+        unset($_SESSION[$clave]);
     }
 }
+
+/**
+ * Clase Controlador: Coordina las acciones del formulario de pasos secuenciales.
+ */
+class EstadisticaController {
+    private GestorSesion $sesion;
+
+    public function __construct() {
+        $this->sesion = new GestorSesion();
+    }
+
+    /**
+     * Intercepta las solicitudes POST de XAMPP y decide qué método encapsulado
+     * ejecutar según el botón o paso enviado en el formulario.
+     */
+    public function procesarPeticion(): void {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            
+            // Paso 1: Establecer dimensiones del contenedor dinámico
+            if (isset($_POST['establecer_cantidad'])) {
+                $cant = (int)$_POST['cantidad'];
+                if ($cant > 0 && $cant <= 12) {
+                    $this->sesion->guardar('cant_p3', $cant);
+                    $this->sesion->guardar('valores_p3', array_fill(0, $cant, ""));
+                }
+                $this->sesion->guardar('res_p3', null);
+                $this->redirigir();
+            }
+            
+            // Paso 2: Procesar el cálculo matemático del modelo
+            if (isset($_POST['calcular_estadisticas'])) {
+                $valoresIngresados = $_POST['valores'] ?? array();
+                $this->sesion->guardar('valores_p3', $valoresIngresados);
+                
+                $analizador = new Estadistica($valoresIngresados);
+                $resultados = [
+                    'promedio' => round($analizador->calcularPromedio(), 4),
+                    'mediana'  => $analizador->calcularMediana(),
+                    'moda'     => $analizador->calcularModa()
+                ];
+                
+                $this->sesion->guardar('res_p3', $resultados);
+                $this->redirigir();
+            }
+            
+            // Acción: Resetear el flujo del estado web
+            if (isset($_POST['reiniciar'])) {
+                $this->sesion->eliminar('cant_p3');
+                $this->sesion->eliminar('valores_p3');
+                $this->sesion->eliminar('res_p3');
+                $this->redirigir();
+            }
+        }
+    }
+
+    private function redirigir(): void {
+        header("Location: punto3.php");
+        exit();
+    }
+
+    /**
+     * Retorna los datos requeridos por la interfaz HTML en un único contenedor.
+     */
+    public function obtenerDatosVista(): array {
+        return [
+            'cantidad'   => $this->sesion->obtener('cant_p3', 0),
+            'valores'    => $this->sesion->obtener('valores_p3', array()),
+            'resultados' => $this->sesion->obtener('res_p3', null)
+        ];
+    }
+}
+
+// --- EJECUCIÓN DEL FLUJO CON POO ---
+$controlador = new EstadisticaController();
+$controlador->procesarPeticion();
+
+$datosVista = $controlador->obtenerDatosVista();
+$cantidad   = $datosVista['cantidad'];
+$valores    = $datosVista['valores'];
+$resultados = $datosVista['resultados'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -101,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="step-box">
         <span class="step-badge">paso 1</span>
         <form method="POST" action="punto3.php" class="inline-form">
-            <label for="cantidad">¿cuántas casillas quieress llenar? (máx 12):</label>
+            <label for="cantidad">¿cuántas casillas quieres llenar? (máx 12):</label>
             <div class="action-row">
                 <input type="number" id="cantidad" name="cantidad" min="1" max="12" required placeholder="ej: 4" value="<?php echo $cantidad > 0 ? $cantidad : ''; ?>">
                 <button type="submit" name="establecer_cantidad" class="btn-small">crear 📂</button>

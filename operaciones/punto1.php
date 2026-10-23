@@ -1,5 +1,4 @@
 <?php
-// CLASE CON LA LÓGICA EN PROGRAMACIÓN ORIENTADA A OBJETOS (POO)
 class Acronimo {
     private string $frase;
 
@@ -8,11 +7,8 @@ class Acronimo {
     }
 
     public function generar(): string {
-        //Quitar signos de puntuación
         $limpio = preg_replace('/[^\w\s\-]/u', '', $this->frase);
-        
         $limpio = str_replace('-', ' ', $limpio);
-        
         $palabras = preg_split('/\s+/', trim($limpio));
         
         $acronimo = "";
@@ -26,11 +22,73 @@ class Acronimo {
     }
 }
 
-$resultado = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['frase'])) {
-    $procesador = new Acronimo($_POST['frase']);
-    $resultado = $procesador->generar();
+class GestorSesion {
+    public function __construct() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
+    public function guardar(string $clave, mixed $valor): void {
+        $_SESSION[$clave] = $valor;
+    }
+
+    public function obtener(string $clave, mixed $defecto = null): mixed {
+        return $_SESSION[$clave] ?? $defecto;
+    }
+
+    public function eliminar(string $clave): void {
+        unset($_SESSION[$clave]);
+    }
 }
+
+class AcronimoController {
+    private GestorSesion $sesion;
+
+    public function __construct() {
+        $this->sesion = new GestorSesion();
+    }
+
+    /**
+     * Captura el envío del formulario, procesa la lógica del modelo
+     * y redirige para evitar el reenvío accidental de datos al recargar.
+     */
+    public function procesarPeticion(): void {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['frase'])) {
+            $procesador = new Acronimo($_POST['frase']);
+            
+            $this->sesion->guardar('res_p1', $procesador->generar());
+            $this->sesion->guardar('frase_p1', $_POST['frase']);
+
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        }
+    }
+
+    /**
+     * Recupera la información temporal almacenada en la sesión para la vista
+     * y limpia las variables inmediatamente para futuros usos.
+     */
+    public function obtenerDatosVista(): array {
+        $datos = [
+            'resultado'     => $this->sesion->obtener('res_p1', ''),
+            'fraseAnterior' => $this->sesion->obtener('frase_p1', '')
+        ];
+
+        $this->sesion->eliminar('res_p1');
+        $this->sesion->eliminar('frase_p1');
+
+        return $datos;
+    }
+}
+
+// Inicialización y ejecución controlada del flujo web
+$controlador = new AcronimoController();
+$controlador->procesarPeticion();
+
+$datosVista = $controlador->obtenerDatosVista();
+$resultado     = $datosVista['resultado'];
+$fraseAnterior = $datosVista['fraseAnterior'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,14 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['frase'])) {
 <div class="container-app">
     
     <div class="welcome-header">
-        <h2>punto 1</h2>
+        <h2>Acronimos</h2>
         <span>Convierte tus frases a acrónimos</span>
     </div>
 
-    <!-- El formulario apunta a su propio archivo de manera dinámica -->
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
         <label for="frase">Ingresa un nombre largo o una frase:</label>
-        <input type="text" id="frase" name="frase" required placeholder="Ej: Así es el destino" value="<?php echo isset($_POST['frase']) ? htmlspecialchars($_POST['frase']) : ''; ?>">
+        <input type="text" id="frase" name="frase" required placeholder="Ej: Así es el destino" value="<?php echo htmlspecialchars($fraseAnterior); ?>">
         
         <button type="submit">Generar Acrónimo</button>
     </form>

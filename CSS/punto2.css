@@ -1,14 +1,13 @@
-/* Importación de fuentes coquette y redondeadas */
 @import url('https://googleapis.com');
 
 :root {
-    --bg-main: #f2f7fc;           /* Fondo general crema-azul muy suave */
-    --blue-dark: #657b8b;         /* Azul pizarra oscuro para textos y bordes duros */
-    --blue-light: #a4b2bc;        /* Azul grisáceo para subheaders */
-    --blue-vintage: #ccdbee;      /* Azul cielo viejo empolvado */
-    --blue-soft: #e5eefc;         /* Azul pastel translúcido */
-    --cream: #f9fdfb;             /* Blanco roto crema */
-    --blue-button: #4a5d6d;       /* Azul profundo para el botón inflado 3D */
+    --bg-main: #f2f7fc;      
+    --blue-dark: #657b8b;    
+    --blue-light: #a4b2bc;   
+    --blue-vintage: #ccdbee;    
+    --blue-soft: #e5eefc; 
+    --cream: #f9fdfb;           
+    --blue-button: #4a5d6d;  
 }
 
 body {
@@ -26,7 +25,6 @@ body {
     color: var(--blue-dark);
 }
 
-/* Contenedor principal con OREJITAS */
 .container-app {
     max-width: 440px;
     margin: 0 auto;
@@ -177,8 +175,8 @@ button[type="submit"]:active {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 130px;
-    height: 130px;
+    width: 230px;
+    height: 230px;
     background-size: contain;
     background-repeat: no-repeat;
     z-index: 10;
@@ -187,7 +185,7 @@ button[type="submit"]:active {
 
 .sticker-left {
     left: -300px;
-    background-image: url('../resources/flor-boton.png');
+    background-image: url('../resources/chocolate.png');
 }
 
 .sticker-right {
