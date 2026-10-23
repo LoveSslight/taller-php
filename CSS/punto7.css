@@ -1,13 +1,13 @@
 @import url('https://googleapis.com');
 
 :root {
-    --purple-dark: #5c3c73;       
-    --purple-medium: #ab80cb;     
-    --purple-light: #d6b5e6;      
-    --pink-bg: #fcdbe3;           
-    --pink-light: #fff2f5;        
-    --yellow-pixel: #fcf6bd;      
-    --cream: #ffffff;            
+    --purple-dark: #5c3c73;
+    --purple-medium: #ab80cb;
+    --purple-light: #d6b5e6;
+    --pink-bg: #fcdbe3;
+    --pink-light: #fff2f5;
+    --yellow-pixel: #fcf6bd;
+    --cream: #ffffff;
 }
 
 body {
@@ -47,7 +47,7 @@ body {
 }
 
 .calc-header-title {
-    font-family: 'VT323', monospace;
+    font-family: 'Quicksand', sans-serif;
     font-size: 2.2em;
     text-align: center;
     color: var(--purple-dark);
@@ -109,7 +109,7 @@ input[type="number"] {
 
 .teclado-operaciones {
     display: grid;
-    grid-template-columns: repeat(5, 11fr); 
+    grid-template-columns: repeat(5, 11fr);
     gap: 8px;
     margin: 10px 0;
     width: 100%;
@@ -146,7 +146,7 @@ input[type="number"] {
     background: var(--pink-bg);
 }
 
-.op-radio-label input[type="radio"]:checked + .op-box-icon {
+.op-radio-label input[type="radio"]:checked+.op-box-icon {
     background: var(--purple-medium);
     color: var(--cream);
     box-shadow: none;
@@ -214,7 +214,7 @@ input[type="number"] {
     flex: 1;
     background: var(--cream);
     background-image: linear-gradient(rgba(130, 88, 159, 0.15) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(130, 88, 159, 0.15) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(130, 88, 159, 0.15) 1px, transparent 1px);
     background-size: 20px 20px;
     border: 4px solid var(--purple-dark);
     border-radius: 20px;
@@ -276,17 +276,17 @@ input[type="number"] {
     animation: flotacionVertical 4s infinite ease-in-out alternate;
 }
 
-.sticker-left { 
-    left: -150px; 
+.sticker-left {
+    left: -150px;
     top: 50%;
-    background-image: url('../resources/ala-iz.gif'); 
+    background-image: url('../resources/ala-iz.gif');
 }
 
-.sticker-right { 
-    right: -115px; 
+.sticker-right {
+    right: -115px;
     top: 50%;
-    background-image: url('../resources/ala-d.gif'); 
-    animation-delay: 0.8s; 
+    background-image: url('../resources/ala-d.gif');
+    animation-delay: 0.8s;
 }
 
 .sticker-up {
@@ -333,5 +333,7 @@ input[type="number"] {
 }
 
 @media (max-width: 800px) {
-    .container-app { flex-direction: column; }
+    .container-app {
+        flex-direction: column;
+    }
 }

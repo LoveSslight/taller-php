@@ -139,7 +139,9 @@ input[type="number"]:focus {
     border-color: var(--purple-accent);
 }
 
-.btn-primary, .btn-secondary, .btn-small {
+.btn-primary,
+.btn-secondary,
+.btn-small {
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
     cursor: pointer;
@@ -177,7 +179,9 @@ input[type="number"]:focus {
     box-shadow: 0 3px 0px var(--pink-dark);
 }
 
-.btn-primary:active, .btn-secondary:active, .btn-small:active {
+.btn-primary:active,
+.btn-secondary:active,
+.btn-small:active {
     transform: translateY(3px);
     box-shadow: none;
 }
@@ -221,12 +225,25 @@ input[type="number"]:focus {
     animation: flotacionVertical 3s infinite ease-in-out alternate;
 }
 
-.sticker-left { left: -300px; background-image: url('../resources/fugaz.png'); }
-.sticker-right { right: -300px; background-image: url('../resources/miku.gif'); animation-delay: 0.6s; }
+.sticker-left {
+    left: -300px;
+    background-image: url('../resources/fugaz.png');
+}
+
+.sticker-right {
+    right: -300px;
+    background-image: url('../resources/miku.gif');
+    animation-delay: 0.6s;
+}
 
 @keyframes flotacionVertical {
-    0% { transform: translateY(-15px); }
-    100% { transform: translateY(15px); }
+    0% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(15px);
+    }
 }
 
 .back-menu-box {
@@ -244,5 +261,7 @@ input[type="number"]:focus {
 }
 
 @media (max-width: 780px) {
-    .sticker-decor { display: none; }
+    .sticker-decor {
+        display: none;
+    }
 }

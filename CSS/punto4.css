@@ -1,13 +1,13 @@
 @import url('https://googleapis.com');
 
 :root {
-    --bg-main: #dbf3e5;          
-    --green-dark: #639878;     
-    --green-light: #a3d0b5;   
-    --green-vintage: #ccebda; 
-    --green-soft: #f0fbf5;   
-    --cream: #ffffff; 
-    --green-button: #508665; 
+    --bg-main: #dbf3e5;
+    --green-dark: #639878;
+    --green-light: #a3d0b5;
+    --green-vintage: #ccebda;
+    --green-soft: #f0fbf5;
+    --cream: #ffffff;
+    --green-button: #508665;
 }
 
 body {
@@ -63,8 +63,8 @@ body {
 
 .gif-container {
     text-align: center;
-    margin: 20px -25px; 
-    width: calc(100% + 50px); 
+    margin: 20px -25px;
+    width: calc(100% + 50px);
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -155,7 +155,7 @@ input[type="text"]:focus {
 .alert {
     background: var(--green-soft);
     background-image: linear-gradient(rgba(163, 208, 181, 0.3) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(163, 208, 181, 0.3) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(163, 208, 181, 0.3) 1px, transparent 1px);
     background-size: 20px 20px;
     border: 3px solid var(--green-dark);
     border-radius: 24px;
@@ -181,7 +181,7 @@ input[type="text"]:focus {
     margin-bottom: 12px;
     font-weight: 700;
     font-family: 'Fredoka', sans-serif;
-    background: var(--cream); 
+    background: var(--cream);
     padding: 6px 12px;
     border-radius: 12px;
     border: 2.5px solid var(--green-light);
@@ -206,22 +206,27 @@ input[type="text"]:focus {
     animation: flotacionVertical 3s infinite ease-in-out alternate;
 }
 
-.sticker-left { 
-    left: -300px; 
+.sticker-left {
+    left: -300px;
     top: 25%;
-    background-image: url('../resources/moño.gif'); 
+    background-image: url('../resources/moño.gif');
 }
 
-.sticker-right { 
-    right: -300px; 
+.sticker-right {
+    right: -300px;
     top: 55%;
-    background-image: url('../resources/osito.png'); 
-    animation-delay: 0.8s; 
+    background-image: url('../resources/osito.png');
+    animation-delay: 0.8s;
 }
 
 @keyframes flotacionVertical {
-    0% { transform: translateY(-35px); }
-    100% { transform: translateY(35px); }
+    0% {
+        transform: translateY(-35px);
+    }
+
+    100% {
+        transform: translateY(35px);
+    }
 }
 
 .back-menu-box {
@@ -240,10 +245,12 @@ input[type="text"]:focus {
     transition: color 0.2s;
 }
 
- immortality-project:hover {
+immortality-project:hover {
     color: var(--green-button);
 }
 
 @media (max-width: 780px) {
-    .sticker-decor { display: none; }
+    .sticker-decor {
+        display: none;
+    }
 }

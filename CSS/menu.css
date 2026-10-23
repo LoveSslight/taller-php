@@ -14,7 +14,7 @@
     --text-muted: #a3707c;
 }
 
-html{
+html {
     scrollbar-color: var(--pink-dark) var(--pink-soft);
     scrollbar-width: auto;
 }
@@ -154,7 +154,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-height: 400px; 
+    max-height: 400px;
     overflow-y: auto;
     padding-right: 5px;
 }
@@ -162,10 +162,12 @@ body {
 .list-buttons::-webkit-scrollbar {
     width: 6px;
 }
+
 .list-buttons::-webkit-scrollbar-track {
     background: var(--pink-soft);
     border-radius: 10px;
 }
+
 .list-buttons::-webkit-scrollbar-thumb {
     background: var(--pink-dark);
     border-radius: 10px;
@@ -186,13 +188,15 @@ body {
 /* Ajustes del enlace de la imagen boton */
 .pure-image-link {
     display: inline-block;
-    flex-shrink: 0; /* Evita que la imagen se achique si el texto es largo */
+    flex-shrink: 0;
+    /* Evita que la imagen se achique si el texto es largo */
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
 
 .pure-image-link img {
-    width: 65px; /* Tamaño ideal y balanceado para la lista vertical */
+    width: 65px;
+    /* Tamaño ideal y balanceado para la lista vertical */
     height: 65px;
     object-fit: contain;
     display: block;
@@ -286,8 +290,13 @@ body {
 }
 
 @keyframes bounceIcon {
-    from { transform: translateY(0) rotate(0deg); }
-    to { transform: translateY(-4px) rotate(15deg); }
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    to {
+        transform: translateY(-4px) rotate(15deg);
+    }
 }
 
 .song-info {
@@ -322,6 +331,7 @@ body {
     filter: hue-rotate(290deg) saturate(140%) brightness(105%);
     box-shadow: 0 4px 0px var(--pink-dark);
 }
+
 .controls {
     display: flex;
     justify-content: center;

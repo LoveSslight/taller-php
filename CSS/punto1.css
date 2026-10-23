@@ -1,19 +1,19 @@
 @import url('https://googleapis.com');
 
 :root {
-    --bg-main: #fcf6f2;         
-    --cafe-dark: #8b7365;    
-    --cafe-light: #bcaaa4;    
-    --pink-vintage: #ffccd5;   
-    --pink-soft: #ffe5ec; 
-    --cream: #fffdf9;        
-    --chocolate-button: #6d4c41; 
+    --bg-main: #fcf6f2;
+    --cafe-dark: #8b7365;
+    --cafe-light: #bcaaa4;
+    --pink-vintage: #ffccd5;
+    --pink-soft: #ffe5ec;
+    --cream: #fffdf9;
+    --chocolate-button: #6d4c41;
 }
 
 body {
     font-family: 'Quicksand', sans-serif;
     background-image: url(../resources/botones.jpg);
-    background-repeat:repeat-x;
+    background-repeat: repeat-x;
     background-attachment: fixed;
     background-size: auto 100vh;
     background-position: center;
@@ -48,8 +48,15 @@ body {
     z-index: -1;
 }
 
-.container-app::before { left: 40px; transform: rotate(-5deg); }
-.container-app::after { right: 40px; transform: rotate(5deg); }
+.container-app::before {
+    left: 40px;
+    transform: rotate(-5deg);
+}
+
+.container-app::after {
+    right: 40px;
+    transform: rotate(5deg);
+}
 
 .welcome-header {
     background-color: var(--pink-soft);
@@ -119,8 +126,8 @@ button[type="submit"] {
     font-weight: 600;
     font-size: 1.2em;
     cursor: pointer;
-    box-shadow: 0 6px 0px #40241a, 
-                0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 0px #40241a,
+        0 10px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
@@ -130,8 +137,8 @@ button[type="submit"]:hover {
 
 button[type="submit"]:active {
     transform: translateY(4px);
-    box-shadow: 0 2px 0px #40241a, 
-                0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 0px #40241a,
+        0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .alert {
@@ -164,32 +171,33 @@ button[type="submit"]:active {
 
 .sticker-decor {
     position: absolute;
-    top: 50%;       
+    top: 50%;
     transform: translateY(-50%);
-    width: 130px;   
+    width: 130px;
     height: 130px;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 10; 
+    z-index: 10;
 
     animation: balanceoCutecore 2.5s infinite ease-in-out alternate;
 }
 
 .sticker-left {
     left: -300PX;
-    background-image: url('../resources/estrella-boton.png'); 
+    background-image: url('../resources/estrella-boton.png');
 }
 
 .sticker-right {
     right: -300px;
     background-image: url('../resources/naruto.png');
-    animation-delay: 0.5s;    
+    animation-delay: 0.5s;
 }
 
 @keyframes balanceoCutecore {
     0% {
-        transform: translateY(-50%) rotate(-12deg); 
+        transform: translateY(-50%) rotate(-12deg);
     }
+
     100% {
         transform: translateY(-50%) rotate(12deg);
     }
