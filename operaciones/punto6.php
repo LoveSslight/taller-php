@@ -31,24 +31,41 @@ class ConstructorArbol
         return $this->construirMapeo(0, count($this->inorden) - 1);
     }
 
-    private function construirMapeo(int $inInicio, int $inFin): ?Nodo
+        private function construirMapeo(int $inInicio, int $inFin): ?Nodo
     {
         if ($inInicio > $inFin) {
             return null;
         }
-        //mirando la raíz se crea un nuevo nodo para lo que equivalga
+
+        // se verifica que el indice preorden exista
+        if (!isset($this->preorden[$this->preIndice])) {
+            return null;
+        }
+
         $valorNodo = $this->preorden[$this->preIndice++];
         $nodo = new Nodo($valorNodo);
 
         if ($inInicio === $inFin) {
             return $nodo;
         }
-        //busca la raíz y encuentra su posición
-        $inIndice = array_search($valorNodo, $this->inorden);
-        //todo antes de la raiz esta en izq y viceversa
+
+        // Se busca la raiz SOLO EN EL RANGO ACTUAL
+        $inIndice = -1;
+        for ($i = $inInicio; $i <= $inFin; $i++) {
+            if ($this->inorden[$i] === $valorNodo) {
+                $inIndice = $i;
+                break;
+            }
+        }
+
+        // Si por un recorrido inválido no se encuentra el nodo en el rango, SO SE RROMPE EL SISTEMA
+        if ($inIndice === -1) {
+            return $nodo; 
+        }
+
+        // Todo antes de la raíz está en la izquierda y viceversa
         $nodo->izq = $this->construirMapeo($inInicio, $inIndice - 1);
         $nodo->der = $this->construirMapeo($inIndice + 1, $inFin);
-        //se ve que sigue luego de la raiz y procedimiento parecido
 
         return $nodo;
     }
