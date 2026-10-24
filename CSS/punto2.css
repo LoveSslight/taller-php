@@ -27,8 +27,11 @@ body {
 
 .container-app {
     max-width: 440px;
+    background-image: url(../resources/nieve.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: auto 100vh;
     margin: 0 auto;
-    background: var(--cream);
     padding: 35px 25px 25px 25px;
     border-radius: 40px;
     border: 4px solid var(--blue-dark);
@@ -43,7 +46,9 @@ body {
     top: -42px;
     width: 38px;
     height: 55px;
-    background: var(--cream);
+    background-image: url(../resources/nieve.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
     border: 4px solid var(--blue-dark);
     border-bottom: none;
     border-radius: 50% 50% 0 0;
@@ -94,7 +99,6 @@ body {
 
 .welcome-gif {
     width: 140px;
-    /* Reducimos el ancho a un tamaño prudente y estético */
     height: 140px;
     object-fit: contain;
     display: block;
@@ -154,7 +158,6 @@ button[type="submit"]:active {
     box-shadow: 0 2px 0px #2a3844, 0 4px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Cuadro de Resultados */
 .alert {
     margin-top: 20px;
     padding: 15px;
@@ -180,7 +183,6 @@ button[type="submit"]:active {
     font-weight: 700;
 }
 
-/* Stickers Flotantes Animados Laterales */
 .sticker-decor {
     position: absolute;
     top: 50%;
@@ -214,7 +216,6 @@ button[type="submit"]:active {
     }
 }
 
-/* Enlace inferior de regreso */
 .back-menu-box {
     margin-top: 25px;
     text-align: center;

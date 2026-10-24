@@ -1,7 +1,5 @@
-/* Importación de fuentes tiernas */
 @import url('https://googleapis.com');
 
-/* Variables globales con tu paleta original rosa/crema */
 :root {
     --pink-dark: #ffb7c5;
     --pink-light: #ffe5ec;
@@ -29,7 +27,6 @@ body {
     color: var(--text-color);
 }
 
-/* Contenedor principal estilo sobre grande */
 .wrapper {
     max-width: 850px;
     margin: 0 auto;
@@ -41,7 +38,6 @@ body {
     overflow: hidden;
 }
 
-/* Banner Superior */
 .header-banner {
     background-color: var(--pink-soft);
     padding: 25px;
@@ -173,7 +169,6 @@ body {
     border-radius: 10px;
 }
 
-/* Contenedor de la fila completa (Imagen izquierda + Texto derecho) */
 .menu-item-row {
     display: flex;
     align-items: center;
@@ -185,18 +180,15 @@ body {
     box-shadow: 0 3px 0px var(--pink-soft);
 }
 
-/* Ajustes del enlace de la imagen boton */
 .pure-image-link {
     display: inline-block;
     flex-shrink: 0;
-    /* Evita que la imagen se achique si el texto es largo */
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
 
 .pure-image-link img {
     width: 65px;
-    /* Tamaño ideal y balanceado para la lista vertical */
     height: 65px;
     object-fit: contain;
     display: block;
@@ -207,7 +199,6 @@ body {
     transform: scale(1.1) rotate(5deg);
 }
 
-/* Bloque de información al lado del botón */
 .item-description {
     display: flex;
     flex-direction: column;
@@ -228,7 +219,6 @@ body {
     margin: 0;
 }
 
-/* El enlace que envuelve a la imagen directamente */
 .image-link {
     display: inline-block;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -252,7 +242,6 @@ body {
     filter: drop-shadow(0px 8px 0px var(--pink-accent));
 }
 
-/* WIDGET MUSICAL CON ANIMACIONES POR CLASES PHP */
 .music-player-widget {
     background: #ffffff;
     border: 3px solid var(--pink-dark);

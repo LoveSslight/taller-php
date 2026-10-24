@@ -1,18 +1,21 @@
 <?php
-
-/**
- * Clase Modelo: Lógica de cálculo matemático puro.
- */
-class CalculadoraSeries
+class SerieMatematica
 {
-    private int $numero;
+    //protected para que las clases hijas sean las que accedan
+    protected int $numero;
 
     public function __construct(int $numero)
     {
         $this->numero = $numero;
     }
+}
 
-    public function calcularFactorial(): string
+//clase hija1
+class SerieFactorial extends SerieMatematica
+{
+
+    //hace su propia versión del método calcular()
+    public function calcular(): string
     {
         if ($this->numero < 0) return "No definido para números negativos";
         if ($this->numero > 170) return "Infinito (Número demasiado grande)";
@@ -21,25 +24,29 @@ class CalculadoraSeries
         for ($i = 1; $i <= $this->numero; $i++) {
             $factorial *= $i;
         }
-        return (string)$factorial;
+        return "El Factorial de {$this->numero} es: " . (string)$factorial;
     }
+}
 
-    public function generarFibonacci(): array
+//clase hija2
+class SerieFibonacci extends SerieMatematica
+{
+
+    //hace su propia versión del método calcular()
+    public function calcular(): string
     {
-        if ($this->numero <= 0) return [];
-        if ($this->numero === 1) return array(0);
+        if ($this->numero <= 0) return "Serie de Fibonacci: []";
+        if ($this->numero === 1) return "Serie de Fibonacci (1 término): 0";
 
         $serie = array(0, 1);
         while (count($serie) < $this->numero) {
             $serie[] = $serie[count($serie) - 1] + $serie[count($serie) - 2];
         }
-        return $serie;
+        return "Serie de Fibonacci ({$this->numero} términos): " . implode(", ", $serie);
     }
 }
 
-/**
- * Clase de Servicio: Encapsula la superglobal $_SESSION.
- */
+//Encapsula la superglobal $_SESSION.
 class GestorSesion
 {
     public function __construct()
@@ -65,9 +72,6 @@ class GestorSesion
     }
 }
 
-/**
- * Clase Controlador: Coordina el ciclo de vida de la petición HTTP.
- */
 class SeriesController
 {
     private GestorSesion $sesion;
@@ -77,24 +81,21 @@ class SeriesController
         $this->sesion = new GestorSesion();
     }
 
-    /**
-     * Captura los datos del formulario, procesa la serie solicitada 
-     * e implementa la redirección PRG para evitar duplicidad de envíos.
-     */
     public function procesarPeticion(): void
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['numero']) && !empty($_POST['operacion'])) {
             $num = (int)$_POST['numero'];
             $operacion = $_POST['operacion'];
 
-            $calculadora = new CalculadoraSeries($num);
             $resultado = "";
 
+            //el programa responde de acuerdo a la clase que se llame para calculadora
             if ($operacion === "factorial") {
-                $resultado = "El Factorial de $num es: " . $calculadora->calcularFactorial();
+                $calculadora = new SerieFactorial($num);
+                $resultado = $calculadora->calcular();
             } elseif ($operacion === "fibonacci") {
-                $secuencia = $calculadora->generarFibonacci();
-                $resultado = "Serie de Fibonacci ($num términos): " . implode(", ", $secuencia);
+                $calculadora = new SerieFibonacci($num);
+                $resultado = $calculadora->calcular();
             }
 
             $this->sesion->guardar('resultado_series', $resultado);
@@ -106,10 +107,6 @@ class SeriesController
         }
     }
 
-    /**
-     * Extrae las respuestas para inyectar en la vista y destruye las 
-     * variables de sesión de forma controlada inmediatamente.
-     */
     public function obtenerDatosVista(): array
     {
         $datos = [
@@ -126,7 +123,7 @@ class SeriesController
     }
 }
 
-// Inicialización del ecosistema orientado a objetos
+// Inicialización
 $controlador = new SeriesController();
 $controlador->procesarPeticion();
 
@@ -135,6 +132,7 @@ $salida      = $datosVista['salida'];
 $numAnterior = $datosVista['numAnterior'];
 $opAnterior  = $datosVista['opAnterior'];
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -150,7 +148,7 @@ $opAnterior  = $datosVista['opAnterior'];
     <div class="container-app">
 
         <div class="welcome-header">
-            <h2>punto 2</h2>
+            <h2>Suceción</h2>
             <span>sucesión de fibonacci o factorial</span>
         </div>
 
@@ -162,14 +160,14 @@ $opAnterior  = $datosVista['opAnterior'];
             <label for="numero">Ingresa un número entero positivo:</label>
             <input type="number" id="numero" name="numero" min="0" required placeholder="Ej: 6" value="<?php echo htmlspecialchars($numAnterior); ?>">
 
-            <label for="operacion">Seleccione la serie o cálculo:</label>
+            <label for="operacion">Selecciona la serie o cálculo:</label>
             <select id="operacion" name="operacion" required>
                 <option value="">-- Elige --</option>
                 <option value="fibonacci" <?php echo ($opAnterior === 'fibonacci') ? 'selected' : ''; ?>>Sucesión de Fibonacci</option>
                 <option value="factorial" <?php echo ($opAnterior === 'factorial') ? 'selected' : ''; ?>>Cálculo de Factorial</option>
             </select>
 
-            <button type="submit">Calcular Serie ✨</button>
+            <button type="submit">🩷 Calcular Serie 🩷</button>
         </form>
 
         <?php if ($salida !== ""): ?>

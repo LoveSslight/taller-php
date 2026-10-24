@@ -66,9 +66,7 @@ class GestorSesion
     }
 }
 
-/**
- * Clase Controlador: Maneja el flujo de la petición web.
- */
+//manejar flujo de la petición
 class ConjuntosController
 {
     private GestorSesion $sesion;
@@ -115,7 +113,6 @@ class ConjuntosController
     }
 }
 
-// Ejecución del controlador POO y mapeo seguro de variables para la vista
 $controlador = new ConjuntosController();
 $controlador->procesarPeticion();
 

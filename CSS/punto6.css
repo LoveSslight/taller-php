@@ -1,23 +1,14 @@
 @import url('https://googleapis.com');
 
 :root {
-    /* Paleta cromática pastel basada fielmente en la imagen adjunta */
     --bg-main: #fceef2;
-    /* Fondo rosa pastel ultra suave */
     --pink-border: #f7cbd5;
-    /* Bordes y cuadrícula rosa */
     --blue-dark: #8ccae7;
-    /* Texto principal y líneas conectoras */
     --blue-light: #b5deee;
-    /* Bordes celestes secundarios */
     --blue-vintage: #dcf2f9;
-    /* Encabezados y cápsulas celestes */
     --yellow-pastel: #fbf9cf;
-    /* Detalles amarillos para destacar textos */
     --cream: #ffffff;
-    /* Paneles limpios de fondo blanco */
     --blue-button: #61bece;
-    /* Botón estético azul apagado */
 }
 
 body {
@@ -70,7 +61,6 @@ body {
     margin-top: 2px;
 }
 
-/* Caja de introducción con fondo amarillo pastel para romper la monotonía */
 .intro-box {
     background: var(--yellow-pastel);
     border: 3px dashed var(--blue-dark);
@@ -301,7 +291,6 @@ input[type="text"]:focus {
     height: 20px;
 }
 
-/* Burbujas del árbol decoradas con un sutil fondo lila/rosa blanquecino */
 .arbol-nodo {
     border: 2.5px solid var(--blue-dark);
     padding: 8px 14px;

@@ -1,8 +1,4 @@
 <?php
-
-/**
- * Clase Modelo: Lógica pura de cálculos estadísticos (Media, Mediana, Moda).
- */
 class Estadistica
 {
     private array $numeros;
@@ -49,9 +45,6 @@ class Estadistica
     }
 }
 
-/**
- * Clase de Servicio: Abstracción orientada a objetos de $_SESSION.
- */
 class GestorSesion
 {
     public function __construct()
@@ -77,9 +70,6 @@ class GestorSesion
     }
 }
 
-/**
- * Clase Controlador: Coordina las acciones del formulario de pasos secuenciales.
- */
 class EstadisticaController
 {
     private GestorSesion $sesion;
@@ -89,18 +79,14 @@ class EstadisticaController
         $this->sesion = new GestorSesion();
     }
 
-    /**
-     * Intercepta las solicitudes POST de XAMPP y decide qué método encapsulado
-     * ejecutar según el botón o paso enviado en el formulario.
-     */
     public function procesarPeticion(): void
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            // Paso 1: Establecer dimensiones del contenedor dinámico
+            // cantidad de datos que se pueden ingresar
             if (isset($_POST['establecer_cantidad'])) {
                 $cant = (int)$_POST['cantidad'];
-                if ($cant > 0 && $cant <= 12) {
+                if ($cant > 0) {
                     $this->sesion->guardar('cant_p3', $cant);
                     $this->sesion->guardar('valores_p3', array_fill(0, $cant, ""));
                 }
@@ -108,7 +94,7 @@ class EstadisticaController
                 $this->redirigir();
             }
 
-            // Paso 2: Procesar el cálculo matemático del modelo
+            // Procesar el cálculo matemático del modelo
             if (isset($_POST['calcular_estadisticas'])) {
                 $valoresIngresados = $_POST['valores'] ?? array();
                 $this->sesion->guardar('valores_p3', $valoresIngresados);
@@ -124,7 +110,7 @@ class EstadisticaController
                 $this->redirigir();
             }
 
-            // Acción: Resetear el flujo del estado web
+            // resetear
             if (isset($_POST['reiniciar'])) {
                 $this->sesion->eliminar('cant_p3');
                 $this->sesion->eliminar('valores_p3');
@@ -140,9 +126,6 @@ class EstadisticaController
         exit();
     }
 
-    /**
-     * Retorna los datos requeridos por la interfaz HTML en un único contenedor.
-     */
     public function obtenerDatosVista(): array
     {
         return [
@@ -153,7 +136,6 @@ class EstadisticaController
     }
 }
 
-// --- EJECUCIÓN DEL FLUJO CON POO ---
 $controlador = new EstadisticaController();
 $controlador->procesarPeticion();
 
@@ -184,10 +166,10 @@ $resultados = $datosVista['resultados'];
         <div class="step-box">
             <span class="step-badge">paso 1</span>
             <form method="POST" action="punto3.php" class="inline-form">
-                <label for="cantidad">¿cuántas casillas quieres llenar? (máx 12):</label>
+                <label for="cantidad">¿cuántas casillas quieres llenar? (máx- no hay):</label>
                 <div class="action-row">
-                    <input type="number" id="cantidad" name="cantidad" min="1" max="12" required placeholder="ej: 4" value="<?php echo $cantidad > 0 ? $cantidad : ''; ?>">
-                    <button type="submit" name="establecer_cantidad" class="btn-small">crear 📂</button>
+                    <input type="number" id="cantidad" name="cantidad" min="1" required placeholder="ej: 4" value="<?php echo $cantidad > 0 ? $cantidad : ''; ?>">
+                    <button type="submit" name="establecer_cantidad" class="btn-small">crear 🍋</button>
                 </div>
             </form>
         </div>

@@ -106,7 +106,6 @@ $numeroAnterior   = $datosVista['numeroAnterior'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Punto 5 - Convertidor Binario</title>
-    <!-- Vinculación del archivo CSS externo -->
     <link rel="stylesheet" href="../css/punto5.css">
 </head>
 

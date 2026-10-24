@@ -12,6 +12,7 @@ class Calculadora
 
     public function operar(string $operacion): float|string
     {
+        //usa switch para poder anular la división x cero
         switch ($operacion) {
             case 'suma':
                 return $this->num1 + $this->num2;
@@ -147,7 +148,6 @@ $historial    = $datosVista['historial'];
 
     <div class="container-app">
 
-        <!-- Columna Izquierda: El Teléfono / Calculadora -->
         <div class="col-telefono-calc">
             <h2 class="calc-header-title">✨CALCULADORA✨</h2>
 
@@ -164,7 +164,6 @@ $historial    = $datosVista['historial'];
                             <input type="number" step="any" name="num1" required placeholder="0" value="<?php echo htmlspecialchars($num1Anterior); ?>">
                         </div>
 
-                        <!-- Teclado de Selección Directa de Iconos -->
                         <div class="teclado-operaciones">
                             <label class="op-radio-label">
                                 <input type="radio" name="operacion" value="suma" <?php echo $opAnterior === 'suma' ? 'checked' : ''; ?>>

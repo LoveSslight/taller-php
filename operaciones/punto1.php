@@ -1,15 +1,17 @@
 <?php
 class Acronimo
 {
+    //ningun codigo externo puede editarl a $frase directamente
     private string $frase;
 
     public function __construct(string $frase)
     {
         $this->frase = $frase;
     }
-
+    //no importa que diga la info solo pasar el texto y recibir el acrónimo
     public function generar(): string
     {
+        //preg-replace reemplaza signos o emojis,preg split fragmenta por espacios
         $limpio = preg_replace('/[^\w\s\-]/u', '', $this->frase);
         $limpio = str_replace('-', ' ', $limpio);
         $palabras = preg_split('/\s+/', trim($limpio));
@@ -17,6 +19,7 @@ class Acronimo
         $acronimo = "";
         foreach ($palabras as $palabra) {
             if (!empty($palabra)) {
+                //strouper fuerza a mayusculas, substr extrae el primer caracter de cada palabra
                 $acronimo .= mb_strtoupper(mb_substr($palabra, 0, 1));
             }
         }
@@ -59,10 +62,7 @@ class AcronimoController
         $this->sesion = new GestorSesion();
     }
 
-    /**
-     * Captura el envío del formulario, procesa la lógica del modelo
-     * y redirige para evitar el reenvío accidental de datos al recargar.
-     */
+    // Captura procesa y redirige
     public function procesarPeticion(): void
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['frase'])) {
@@ -76,10 +76,6 @@ class AcronimoController
         }
     }
 
-    /**
-     * Recupera la información temporal almacenada en la sesión para la vista
-     * y limpia las variables inmediatamente para futuros usos.
-     */
     public function obtenerDatosVista(): array
     {
         $datos = [
@@ -94,7 +90,7 @@ class AcronimoController
     }
 }
 
-// Inicialización y ejecución controlada del flujo web
+// Inicialización y ejecución
 $controlador = new AcronimoController();
 $controlador->procesarPeticion();
 

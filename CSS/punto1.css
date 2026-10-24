@@ -33,7 +33,6 @@ body {
     position: relative;
 }
 
-/* orejitas del contenedor */
 .container-app::before,
 .container-app::after {
     content: "";

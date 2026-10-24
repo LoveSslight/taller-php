@@ -1,6 +1,7 @@
 <?php
 class Nodo
 {
+    //puede o contener de forma valida un objeto se nulo
     public string $valor;
     public ?Nodo $izq = null;
     public ?Nodo $der = null;
@@ -25,6 +26,7 @@ class ConstructorArbol
 
     public function construir(): ?Nodo
     {
+        //inicia un contador en 0 que con cada letra avanza
         $this->preIndice = 0;
         return $this->construirMapeo(0, count($this->inorden) - 1);
     }
@@ -34,22 +36,24 @@ class ConstructorArbol
         if ($inInicio > $inFin) {
             return null;
         }
-
+        //mirando la raíz se crea un nuevo nodo para lo que equivalga
         $valorNodo = $this->preorden[$this->preIndice++];
         $nodo = new Nodo($valorNodo);
 
         if ($inInicio === $inFin) {
             return $nodo;
         }
-
+        //busca la raíz y encuentra su posición
         $inIndice = array_search($valorNodo, $this->inorden);
-
+        //todo antes de la raiz esta en izq y viceversa
         $nodo->izq = $this->construirMapeo($inInicio, $inIndice - 1);
         $nodo->der = $this->construirMapeo($inIndice + 1, $inFin);
+        //se ve que sigue luego de la raiz y procedimiento parecido
 
         return $nodo;
     }
 
+    //convertir en texto los resultados
     public function obtenerVistaEstructura(?Nodo $raiz): string
     {
         if ($raiz === null) return "Árbol vacío";
@@ -78,6 +82,7 @@ class ConstructorArbol
         return $salida;
     }
 
+    //recorre el objeto para estructurar los nodos en html
     public function renderizarArbolGrafico(?Nodo $nodo): string
     {
         if ($nodo === null) return "";
@@ -122,6 +127,7 @@ class GestorSesion
     }
 }
 
+//procesa lo ingresado y lo almacena para que con flexbox se grafique
 class ArbolController
 {
     private GestorSesion $sesion;
